@@ -13,7 +13,14 @@ class Neighbor(models.Model):
 
 class User (models.Model):
     user_name = models.CharField(max_length=60)
-    email = models.CharField(max_length=60)
+    email = models.EmailField(max_length=60)
 
     def __str__(self):
         return self.user_name
+
+class Business (models.Model):
+    business_name=models.CharField()
+    business_email = models.EmailField()
+
+    def __str__(self):
+        return self.business_name
