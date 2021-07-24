@@ -11,3 +11,9 @@ class Neighbor(models.Model):
     def __str__(self):
         return self.name
 
+class User (models.Model):
+    user_name = models.CharField(max_length=60)
+    email = models.CharField(max_length=60)
+
+    def __str__(self):
+        return self.user_name
