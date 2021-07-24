@@ -62,7 +62,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!&2mkob60bx&q2zrp$(@d2yfhwbvz)ax9hxmq5fnlp)()r@t-h'
+# SECRET_KEY = 'django-insecure-!&2mkob60bx&q2zrp$(@d2yfhwbvz)ax9hxmq5fnlp)()r@t-h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,7 +79,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'spyapp',
+    'spypyapp',
     'bootstrap3',
 ]
 
@@ -117,14 +117,14 @@ WSGI_APPLICATION = 'spyproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neighborhood',
-        'USER': 'jose',
-        'PASSWORD': 'joseotis45',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'neighborhood',
+#         'USER': 'jose',
+#         'PASSWORD': 'joseotis45',
+#     }
+# }
 
 
 # Password validation
