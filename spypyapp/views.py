@@ -21,6 +21,8 @@ def neighborhood_view(request, neighborood_id):
     except Neighbor.DoesNotExist:
         
         raise Http404
+
+    return render (request, 'spy/detail.html', {"neighbor":neighbor})
     
 def new_neighbor(request):
     current_user = request.user
