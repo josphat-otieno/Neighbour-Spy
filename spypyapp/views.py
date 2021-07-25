@@ -50,6 +50,9 @@ def update_count(request, neighborhood_id):
 
     return render (request, 'spy/update_count.html', context)
 
+def create_post(request):
+    pass
+
 
 def delete_neighborhood(request, neighborhood_id):
     item = Neighbor.objects.get(id = neighborhood_id)

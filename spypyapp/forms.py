@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Neighbor, Business
+from .models import Profile, Neighbor, Business,Post
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import fields
 from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserCreationForm
 
 from spypyapp import models
 
@@ -18,6 +19,12 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class UserSignUpForm(UserCreationForm):
+    email = forms.EmailField(max_length=100, help_text='Required')
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
 
 class EditProfileForm(UserChangeForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
@@ -49,3 +56,9 @@ class CountForm(forms.ModelForm):
     class Meta:
         model = Neighbor
         fields = ['occupants_count']
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['post_title', 'post_description']
+
