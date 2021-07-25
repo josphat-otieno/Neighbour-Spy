@@ -25,13 +25,7 @@ def neighborhood_view(request, neighborood_id):
 def new_neighbor(request):
     current_user = request.user
 
-def delete_neighborhood(request, neighborood_id):
-    item = Neighbor.objects.get(id = neighborood_id)
-    if request.method == 'POST':
-        item.delete()
-        return redirect('/')
 
-    return render(request, 'spy/delete.html', {"item":item})
 
 def register(request):
     if request.method=="POST":
