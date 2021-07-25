@@ -14,6 +14,7 @@ urlpatterns = [
     path('search/', views.search_business, name='search'),
     url(r'^new/neighbor', views.new_neighbor, name='neighbor'),
     url(r'^neighbor/(\d+)/$',views.neighborhood_view,name ='neighbor-detail'),
+    path('delete/<int:neighborhood_id>/', views.delete_neighborhood, name='delete_neighborhood'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

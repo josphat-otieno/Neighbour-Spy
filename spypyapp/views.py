@@ -40,8 +40,8 @@ def new_neighbor(request):
         
 
 
-def delete_neighborhood(request, neighborood_id):
-    item = Neighbor.objects.get(id = neighborood_id)
+def delete_neighborhood(request, neighborhood_id):
+    item = Neighbor.objects.get(id = neighborhood_id)
     if request.method == 'POST':
         item.delete()
         return redirect('/')
