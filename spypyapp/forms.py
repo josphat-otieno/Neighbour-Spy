@@ -32,3 +32,13 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['user_name', 'phone_number', 'bio',]
+
+class NeighborForm(forms.ModelForm):
+    class Meta:
+        model = Neighbor
+        fields = ['name', 'location', 'health_contact', 'police_contact', 'occupants_count']
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        fields = ['business_name', 'business_description', 'business_email']

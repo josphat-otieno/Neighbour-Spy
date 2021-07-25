@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm
+from django.http.response import Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import *
@@ -11,7 +12,26 @@ def index(request):
     neighbors = Neighbor.objects.all()
 
 
-    return render(request, 'spy/index.html')
+    return render(request, 'spy/index.html',{"businesses":businesses, "neighbors":neighbors})
+
+def neighborhood_view(request, neighborood_id):
+    try:
+        neighbor = Neighbor.objects.get(id = neighborood_id)
+
+    except Neighbor.DoesNotExist:
+        
+        raise Http404
+    
+def new_neighbor(request):
+    current_user = request.user
+
+def delete_neighborhood(request, neighborood_id):
+    item = Neighbor.objects.get(id = neighborood_id)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('/')
+
+    return render(request, 'spy/delete.html', {"item":item})
 
 def register(request):
     if request.method=="POST":
@@ -36,7 +56,7 @@ def edit_profile(request):
     user = request.user
     if request.method == 'POST':
         user_form=EditProfileForm(request.POST, request.FILES,instance =request.user)
-        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        profile_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -44,10 +64,10 @@ def edit_profile(request):
             return redirect('profile')
     else:
         user_form=EditProfileForm(instance =request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.userprofile)
+        profile_form = ProfileUpdateForm(instance=request.user)
 
         context = {"user_form":user_form, "profile_form":profile_form, "user":user}
-        return render(request, 'spys/edit_profile.html', context)
+        return render(request, 'spy/edit_profile.html', context)
 
 
 def search_business(request):

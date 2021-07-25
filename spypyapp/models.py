@@ -12,8 +12,7 @@ class Profile (models.Model):
     email = models.EmailField(max_length=60)
 
     def __str__(self):
-        return self.user_name
-
+        return self.user
 
 
 class Neighbor(models.Model):
