@@ -22,3 +22,8 @@ def register(request):
     else:
         form= RegistrationForm()
     return render(request, 'django_registration/registration_form.html', {"form":form})
+
+def profile_view(request):
+    user = request.user
+    user = User.objects.get(username = user.username)
+    return render (request, 'awards/profile.html', {"user":user})

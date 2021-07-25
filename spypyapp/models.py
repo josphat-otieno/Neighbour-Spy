@@ -4,14 +4,27 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Profile (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_name = models.CharField(max_length=60)
+    phone_number = models.IntegerField(default=717878813)
+    bio = models.TextField(default='')
+    email = models.EmailField(max_length=60)
+
+    def __str__(self):
+        return self.user_name
+
+
+
 class Neighbor(models.Model):
     name =models.CharField(max_length=60)
     location = models.CharField(max_length=60)
     health_contact = models.IntegerField( blank=True, default=+254717878813)
     police_contact = models.IntegerField( blank=True, default=999)
     occupants_count = models.IntegerField(default=1)
-    profile = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    head = models.CharField(max_length=20, default='')
+    profile = models.ForeignKey(User, on_delete=models.CASCADE, related_name='neighbor')
+    
 
 
     def __str__(self):
@@ -39,18 +52,6 @@ class Neighbor(models.Model):
         return neighborhood_count
 
 
-class Profile (models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_name = models.CharField(max_length=60)
-    bio = models.TextField(default='')
-    email = models.EmailField(max_length=60)
-    neighbourhood = models.ForeignKey(Neighbor, on_delete=models.SET_NULL, null=True, related_name='users', blank=True)
-
-  
-
-
-    def __str__(self):
-        return self.user_name
 
 class Business (models.Model):
     business_name=models.CharField(max_length=60)
@@ -73,3 +74,4 @@ class Business (models.Model):
     def find_business(cls, business_name):
         business = cls.objects.filter(business_name__icontains=business_name).all()
         return business
+
