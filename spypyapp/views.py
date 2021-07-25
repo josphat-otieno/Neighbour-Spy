@@ -50,7 +50,7 @@ def edit_profile(request):
         return render(request, 'spys/edit_profile.html', context)
 
 
-def search(request):
+def search_business(request):
     
     if 'businesses' in request.GET and request.GET["businesses"]:
         search_term = request.GET.get("businesses")

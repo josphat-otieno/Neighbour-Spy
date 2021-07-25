@@ -1,0 +1,42 @@
+{% extends 'spy/base.html' %}
+{% load bootstrap3 %} {% load static %}
+
+{% block content %}
+<div class="continer-fluid" style="padding-top: 90px; background-color: #023047;font-family: Assistant;">
+  <div class="container" style="padding-top: 100px; color: antiquewhite;">
+
+    <div class="row">
+      {% if businesses%}
+      <h2>Found {{ projects|length }} businesses</h2>
+      {% else %}
+      <h2> Found 0 projects for the search term {{message}}</h2>
+      {% endif %}
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      {% if businesses %}
+      {% for business in businesses %}
+      
+      <div class=" col-md-6">
+        <div class="panel">
+          <div class="panel-header">
+            <h1 style="color: blue;">{{business.business_name}}</h1>
+          </div>
+          <div class="panel-body">
+            <p style="color: blue;">{{business.business_description}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+{% block scripts %} {{block.super}}
+<script type="text/javascript" src="{% static 'js/main.js '%}"></script>
+{% endblock %}
