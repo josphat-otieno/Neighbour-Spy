@@ -11,6 +11,7 @@ urlpatterns = [
     url('login/', auth_views.LoginView.as_view(), name='login'),
     path('profile/', views.profile_view, name='profile'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
+    path('search/', views.search, name='search'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

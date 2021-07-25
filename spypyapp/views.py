@@ -7,6 +7,10 @@ from django.contrib.auth import authenticate, login
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def index(request):
+    businesses = Business.objects.all()
+    neighbors = Neighbor.objects.all()
+
+
     return render(request, 'spy/index.html')
 
 def register(request):
@@ -44,4 +48,18 @@ def edit_profile(request):
 
         context = {"user_form":user_form, "profile_form":profile_form, "user":user}
         return render(request, 'spys/edit_profile.html', context)
+
+
+def search(request):
+    
+    if 'businesses' in request.GET and request.GET["businesses"]:
+        search_term = request.GET.get("businesses")
+        searched_businesses = Business.search_business(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'spy/search.html',{"message":message,"businesses": searched_businesses})
+
+    else:
+        message = "You haven't searched for any business"
+        return render(request, 'spy/search.html',{"message":message})
 
