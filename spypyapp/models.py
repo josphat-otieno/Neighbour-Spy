@@ -46,6 +46,7 @@ class User (models.Model):
 
 class Business (models.Model):
     business_name=models.CharField(max_length=60)
+    business_description = models.TextField(default='')
     business_email = models.EmailField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     neighborhood = models.ForeignKey(Neighbor, on_delete=models.CASCADE)
@@ -53,3 +54,14 @@ class Business (models.Model):
 
     def __str__(self):
         return self.business_name
+
+    def save_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def find_business(cls, business_name):
+        business = cls.objects.filter(business_name__icontains=business_name).all()
+        return business
