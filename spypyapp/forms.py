@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import fields
 from django.contrib.auth.forms import UserChangeForm
 
+from spypyapp import models
+
 class RegistrationForm(UserCreationForm):
     email=forms.EmailField()
     class Meta:
@@ -42,3 +44,8 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = ['business_name', 'business_description', 'business_email']
+
+class CountForm(forms.ModelForm):
+    class Meta:
+        model = Neighbor
+        fields = ['occupants_count']

@@ -21,7 +21,6 @@ class Neighbor(models.Model):
     health_contact = models.IntegerField( blank=True, default=+254717878813)
     police_contact = models.IntegerField( blank=True, default=999)
     occupants_count = models.IntegerField(default=1)
-    head = models.CharField(max_length=20, default='')
     profile = models.ForeignKey(User, on_delete=models.CASCADE, related_name='neighbor')
     
 
@@ -73,3 +72,8 @@ class Business (models.Model):
     def search_business(cls, search_term):
         return cls.objects.filter(business_name__icontains=search_term).all()
 
+class Post(models.Model):
+    post_title = models.CharField(max_length=60)
+    post_description = models.TextField(default='')
+    posted = models.DateTimeField(auto_now_add=True)
+    neighborhood = models.ForeignKey(Neighbor, on_delete=models.CASCADE, related_name='neighbor')

@@ -14,9 +14,9 @@ def index(request):
 
     return render(request, 'spy/index.html',{"businesses":businesses, "neighbors":neighbors})
 
-def neighborhood_view(request, neighborood_id):
+def neighborhood_view(request, neighborhood_id):
     try:
-        neighbor = Neighbor.objects.get(id = neighborood_id)
+        neighbor = Neighbor.objects.get(id = neighborhood_id)
 
     except Neighbor.DoesNotExist:
         
@@ -38,6 +38,17 @@ def new_neighbor(request):
         new_form=NeighborForm()
     return render(request, 'spy/new_neighbor.html', {"new_form":new_form})
         
+def update_count(request, neighborhood_id):
+    count = Neighbor.objects.get(id=neighborhood_id)
+    count_form = CountForm(instance=count)
+    context = {"count_form": count_form}
+    if request.method =="POST":
+        count_form = CountForm(request.POST, instance = count)
+        if count_form.is_valid():
+            count_form.save()
+            return redirect("/")
+
+    return render (request, 'spy/update_count.html', context)
 
 
 def delete_neighborhood(request, neighborhood_id):

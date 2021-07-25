@@ -10,8 +10,9 @@
     <h1>{{neighbor.name}}</h1>
     <p>{{neighbor.location}}</p>
     <p>Number of People {{neighbor.occupants_count}}</p>
-    <button class="btn btn-md btn-warning"><a href="{% url 'neighbor-detail' neighbor.id %}">View Jirani Deatils</a></button>
-    <button class="btn btn-md btn-warning"><a href="{% url 'delete_neighborhood' neighbor.id %}">Delete</a></button>
+    <!-- <button class="btn btn-md btn-warning"><a href="{% url 'neighbor-detail' neighbor.id %}">View Jirani Deatils</a></button>
+    <button class="btn btn-md btn-warning"><a href="{% url 'update_count' neighbor.id %}">Update Occupants</a></button>
+    <button class="btn btn-md btn-warning"><a href="{% url 'delete_neighborhood' neighbor.id %}">Delete</a></button> -->
     {% endfor %}
 </div>
 {% endblock %}
