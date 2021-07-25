@@ -1,14 +1,19 @@
-from django.urls import path
+from django.urls import path,include
 from django.conf.urls import url
 from django.conf.urls.static import static
 from . import views
 from django.conf import settings
 from django.contrib.auth import views as auth_views
-
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import views as auth_vies
 urlpatterns = [ 
     url(r'^$', views.index, name='index'),
-    url('register/',views.register, name='registration'),
-    url('login/', auth_views.LoginView.as_view(), name='login'),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', auth_vies.LogoutView.as_view(), {'next_page':'/accounts/register/'}),
+    # url('register/',views.register, name='registration'),
+    # url('login/', auth_views.LoginView.as_view(), name='login'),
+    # path('logout/', auth_views.LogoutView.as_view(), {'next_page':'/accounts/register/'}),
     path('profile/', views.profile_view, name='profile'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('search/', views.search_business, name='search'),

@@ -3,7 +3,7 @@ from django.http.response import Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from django.contrib.auth import authenticate, login
+
  
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -14,6 +14,7 @@ def index(request):
 
     return render(request, 'spy/index.html',{"businesses":businesses, "neighbors":neighbors})
 
+@login_required(login_url='/accounts/login/')
 def neighborhood_view(request, neighborhood_id):
     try:
         neighbor = Neighbor.objects.get(id = neighborhood_id)
@@ -50,8 +51,9 @@ def update_count(request, neighborhood_id):
 
     return render (request, 'spy/update_count.html', context)
 
-def create_post(request):
-    pass
+# def create(request, neighborhood_id):
+#     business = Business.objects.filter()
+#     pass
 
 
 def delete_neighborhood(request, neighborhood_id):
@@ -62,19 +64,19 @@ def delete_neighborhood(request, neighborhood_id):
 
     return render(request, 'spy/delete.html', {"item":item})
 
-def register(request):
-    if request.method=="POST":
-        form=RegistrationForm(request.POST)
-        if form.is_valid():
-                form.save()
-                username = form.cleaned_data.get('username')
-                raw_password = form.cleaned_data.get('password1')
-                user = authenticate(username=username, password=raw_password)
-                login(request, user)
-        return redirect('login')
-    else:
-        form= RegistrationForm()
-    return render(request, 'django_registration/registration_form.html', {"form":form})
+# def register(request):
+#     if request.method=="POST":
+#         form=RegistrationForm(request.POST)
+#         if form.is_valid():
+#                 form.save()
+#                 username = form.cleaned_data.get('username')
+#                 raw_password = form.cleaned_data.get('password1')
+#                 user = authenticate(username=username, password=raw_password)
+#                 login(request, user)
+#         return redirect('login')
+#     else:
+#         form= RegistrationForm()
+#     return render(request, 'django_registration/registration_form.html', {"form":form})
 
 def profile_view(request):
     user = request.user
@@ -85,8 +87,8 @@ def edit_profile(request):
     user = request.user
     user = User.objects.get(username = user.username)
     if request.method == 'POST':
-        user_form=EditProfileForm(request.POST, request.FILES,instance =request.user,data=request.POST)
-        profile_form = ProfileUpdateForm(request.POST, instance=request.user.profile,data=request.POST)
+        user_form=EditProfileForm(request.POST, request.FILES,instance =request.user)
+        profile_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
