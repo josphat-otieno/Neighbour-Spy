@@ -26,4 +26,4 @@ def register(request):
 def profile_view(request):
     user = request.user
     user = User.objects.get(username = user.username)
-    return render (request, 'awards/profile.html', {"user":user})
+    return render (request, 'spy/profile.html', {"user":user})
