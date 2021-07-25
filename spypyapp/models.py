@@ -1,5 +1,5 @@
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
   
 
 # Create your models here.
@@ -7,9 +7,12 @@ from django.db import models
 class Neighbor(models.Model):
     name =models.CharField(max_length=60)
     location = models.CharField(max_length=60)
-    health_contact = models.IntegerField( blank=True, default=1)
-    police_contact = models.IntegerField( blank=True, default=1)
+    health_contact = models.IntegerField( blank=True, default=+254717878813)
+    police_contact = models.IntegerField( blank=True, default=999)
     occupants_count = models.IntegerField(default=1)
+    profile = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
 
     def __str__(self):
         return self.name
@@ -36,10 +39,15 @@ class Neighbor(models.Model):
         return neighborhood_count
 
 
-class User (models.Model):
+class Profile (models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_name = models.CharField(max_length=60)
+    bio = models.TextField(default='')
     email = models.EmailField(max_length=60)
-    neighborhood = models.ForeignKey(Neighbor, on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(Neighbor, on_delete=models.SET_NULL, null=True, related_name='users', blank=True)
+
+  
+
 
     def __str__(self):
         return self.user_name
