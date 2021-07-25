@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 #  
 
 # Create your models here.
@@ -6,10 +7,34 @@ from django.db import models
 class Neighbor(models.Model):
     name =models.CharField(max_length=60)
     location = models.CharField(max_length=60)
+    health_contact = models.IntegerField( blank=True, default=1)
+    police_contact = models.IntegerField( blank=True, default=1)
     occupants_count = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name
+
+    def create(self):
+        self.save()
+
+    def delete_neighbour(self):
+        self.delete()
+
+    @classmethod
+    def find_neighborhood(cls, neighborhood_id):
+        neighborhood = cls.objects.get(id = neighborhood_id)
+        return neighborhood
+
+    @classmethod
+    def update_neighborhood(cls, neighborhood_id):
+        neighborhood  = cls.objects.filter(id=neighborhood_id).update()
+        return neighborhood
+
+    @classmethod
+    def update_count(cls, count):
+        neighborhood_count = cls.objects.filter(occupants_count=1).update(occupants_count=count)
+        return neighborhood_count
+
 
 class User (models.Model):
     user_name = models.CharField(max_length=60)
