@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+#  
 
 # Create your models here.
 
@@ -14,13 +14,17 @@ class Neighbor(models.Model):
 class User (models.Model):
     user_name = models.CharField(max_length=60)
     email = models.EmailField(max_length=60)
+    neighborhood = models.ForeignKey(Neighbor, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user_name
 
 class Business (models.Model):
-    business_name=models.CharField()
+    business_name=models.CharField(max_length=60)
     business_email = models.EmailField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    neighborhood = models.ForeignKey(Neighbor, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.business_name
