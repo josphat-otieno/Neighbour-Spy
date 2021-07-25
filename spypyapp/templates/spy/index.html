@@ -4,7 +4,12 @@
 
 {% block content %}
 <div class="container" style="padding-top: 90px;">
-    <h1>Heighbours watch</h1>
-</div>
+    <h1>Neighbours watch</h1>
 
+    {% for neighbor in neighbors %}
+    <h1>{{neighbor.name}}</h1>
+    <p>{{neighbor.location}}</p>
+    <p>Number of People {{neighbor.occupants_count}}</p>
+    {% endfor %}
+</div>
 {% endblock %}

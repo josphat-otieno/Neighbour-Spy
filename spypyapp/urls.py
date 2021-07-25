@@ -12,7 +12,8 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('search/', views.search_business, name='search'),
-    url(r'^new/neighbor', views.new_neighbor, name='new-neighbor'),
+    url(r'^new/neighbor', views.new_neighbor, name='neighbor'),
+    url(r'^neighbor/(\d+)/$',views.neighborhood_view,name ='neighbor-detail'),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

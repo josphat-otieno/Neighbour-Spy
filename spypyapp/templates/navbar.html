@@ -17,7 +17,7 @@
       </form>
     </div>
     <div class="nav navbar-nav navbar-right">
-      <a  style="margin-right: 10px; font-size: 20px; color: antiquewhite;" href="">Post Project</a>
+      <a  style="margin-right: 10px; font-size: 20px; color: antiquewhite;" href="{% url 'neighbor' %}">Add Neighbor</a>
 
       <a  style="margin-right: 10px;font-size: 20px; color: antiquewhite;"href="{% url 'profile' %}">Profile </a>
       {% if user.is_authenticated %}
