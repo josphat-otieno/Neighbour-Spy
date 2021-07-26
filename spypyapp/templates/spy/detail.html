@@ -17,6 +17,7 @@
                 {{business.business_name}}
                 {% endfor %}
                 <hr>
+                <button class="btn btn-md btn-warning"><a href="{% url 'create_business' neighbor.id %}">Add business</a></button>
             </div>
         </div>
     </div>

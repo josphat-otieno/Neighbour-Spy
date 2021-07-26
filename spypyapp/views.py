@@ -20,19 +20,8 @@ def neighborhood_view(request, neighborhood_id):
     neighbor = Neighbor.objects.get(id = neighborhood_id)
     businesses = Business.objects.filter(neighborhood=neighbor)
     posts = Post.objects.filter(neighborhood=neighbor)
-    if request.method =='POST':
-        businesse_form = BusinessForm(request.POST)
-        if businesse_form.is_valid():
-            business = businesse_form.save(commit=False)
-            business.neighborhood= neighbor
-            business.user = request.user.profile
-            business.save()
-            return redirect('neighborhood_view',neighbor.id )
-
-    else:
-        businesse_form=BusinessForm()
-
-    return render (request, 'spy/detail.html', {"neighbor":neighbor, "businesses":businesses, "businesse_form":businesse_form, "posts":posts})
+    
+    return render (request, 'spy/detail.html', {"neighbor":neighbor, "businesses":businesses,"posts":posts})
     
 def new_neighbor(request):
     current_user = request.user
@@ -60,18 +49,21 @@ def update_count(request, neighborhood_id):
 
     return render (request, 'spy/update_count.html', context)
 
-def create_business(request):
+def create_business(request, neighborhood_id):
+    neighbor = Neighbor.objects.get(id = neighborhood_id)
     current_user = request.user
-    if request.method == 'POST':
-        business_form = BusinessForm(request.POST, request.FILES)
-        new_business = business_form.save(commit=False)
-        new_business.user = current_user
-        new_business.save()
-        return redirect('neighborhood_view',{"business_form":business_form})
+    if request.method =='POST':
+        business_form = BusinessForm(request.POST)
+        if business_form.is_valid():
+            business = business_form.save(commit=False)
+            business.neighborhood= neighbor
+            business.user = current_user
+            business.save()
+            return redirect('neighbor-detail',neighbor.id )
 
     else:
-        business_form = BusinessForm()
-    return render(request, 'spy/business.html',)
+        business_form=BusinessForm()
+    return render(request, 'spy/business.html',{"business_form":business_form, })
 
 def delete_neighborhood(request, neighborhood_id):
     item = Neighbor.objects.get(id = neighborhood_id)
