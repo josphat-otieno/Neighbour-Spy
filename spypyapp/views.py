@@ -51,10 +51,18 @@ def update_count(request, neighborhood_id):
 
     return render (request, 'spy/update_count.html', context)
 
-# def create(request, neighborhood_id):
-#     business = Business.objects.filter()
-#     pass
+def create_business(request):
+    current_user = request.user
+    if request.method == 'POST':
+        business_form = BusinessForm(request.POST, request.FILES)
+        new_business = business_form.save(commit=False)
+        new_business.user = current_user
+        new_business.save()
+        return redirect('neighborhood_view',{"business_form":business_form})
 
+    else:
+        business_form = BusinessForm()
+    return render(request, 'spy/business.html',)
 
 def delete_neighborhood(request, neighborhood_id):
     item = Neighbor.objects.get(id = neighborhood_id)
@@ -63,20 +71,6 @@ def delete_neighborhood(request, neighborhood_id):
         return redirect('/')
 
     return render(request, 'spy/delete.html', {"item":item})
-
-# def register(request):
-#     if request.method=="POST":
-#         form=RegistrationForm(request.POST)
-#         if form.is_valid():
-#                 form.save()
-#                 username = form.cleaned_data.get('username')
-#                 raw_password = form.cleaned_data.get('password1')
-#                 user = authenticate(username=username, password=raw_password)
-#                 login(request, user)
-#         return redirect('login')
-#     else:
-#         form= RegistrationForm()
-#     return render(request, 'django_registration/registration_form.html', {"form":form})
 
 def profile_view(request):
     user = request.user
