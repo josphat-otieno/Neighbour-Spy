@@ -5,26 +5,44 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 
 {% block content %}
-<div class="container-fluid" style="padding-top: 60px; background-color: #023047;font-family: Assistant;">
-    <div class="container" style="padding-top: 60px;">
+<div class="container-fluid" style="padding-top: 30px; background-color: #023047;font-family: Assistant;">
+    <div class="container" style="padding-top: 30px;">
         <div class="row">
             <div class="col-md-6">
-                <h1 style="text-transform: capitalize; color: antiquewhite;">{{neighbor.name}}</h1>
+                <h1 class="text-center" style="text-transform: capitalize; color: antiquewhite;">{{neighbor.name}}  </h1>
+                <p style="display: flex; justify-content: space-between;"> <span style="font-size: 20px;">Number of Occupants: {{neighbor.occupants_count}} </span>  
+                <button class="btn btn-md btn-warning" style="margin-right: 200px;"><a href="{% url 'update_count' neighbor.id %}">Update Occupants</a></button>
+                    </p>
+                    <p style="font-size: 25px;"> Neighborhood Location: <span class="text-capitalize">{{neighbor.location}}</span></p>
+
             </div>
             <div class="col-md-4" style="padding-top: 90px; color: antiquewhite;" >
-                {% for business in businesses %}
-                {{business.business_name}}
-                {% endfor %}
-                <hr>
-                <button class="btn btn-md btn-warning"><a href="{% url 'create_business' neighbor.id %}">Add business</a></button>
-
-                <button class="btn btn-md btn-warning"><a href="{% url 'create_post' %}">Add Post</a></button>
-                {% for post in posts %}
-                <h1>{{post.post_title}}</h1>
-                {% endfor %}
-            
+               <h1>EMERGENCY CONTANCTS</h1>
+               <p style="font-size: 20px;">Nearby Health Facilty Contact: {{neighbor.health_contact}}</p>
+               <p style="font-size: 20px;">Nearby Police Station Contact: {{neighbor.police_contact}}</p>
             </div>
         </div>
+        <button class="btn btn-md btn-warning"><a href="{% url 'delete_neighborhood' neighbor.id %}" style="font-size: 15px;">Leave Neighborhood</a></button> 
+        <hr>
+        <div class="row white" style="padding-top: 10px; color: antiquewhite; align-items: center; padding: auto;" >
+            <h2>Businesses in this Neighborhood</h2>
+            <button class="btn btn-md btn-warning"><a href="{% url 'create_business' neighbor.id %}">Add business</a></button>
+            {% for business in businesses %}
+            <div class="panel" style="color: black; width: 500px;">
+                <div class="panel-header">
+                    <h2 class="text-center text-capitalize"> {{business.business_name}}</h2>
+                </div>
+                <div class="panel-body">
+                    <p style="font-size: 20px;">{{business.business_description}}</p>
+                </div>
+                <div class="panel-footer">
+                    <p style="font-style: italic; font-size: 15px;">Email: {{business.business_email}}</p>
+                </div>
+   
+            </div>
+           
+            {% endfor %}
+
     </div>
     </div>
 

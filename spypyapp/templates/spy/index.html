@@ -6,37 +6,42 @@
 {% block content %}
 <div class="container" style="padding-top: 90px;">
     <div class="row">
-        <h1>My Neighborhood</h1>
+       
         <div class="col-md-6">
+            <h1 class="text-center">My Neighbours</h1>
+            <hr>
             {% for neighbor in neighbors %}
-            <div class="panel mb-4" style="color:black;">
+            <div class="panel mb-4" style="color:black; width: 400px;">
                 <div class="panel-header">
-                    <h1>{{neighbor.name}}</h1>
+                    <h1 class="text-center" style="text-transform: capitalize;"> {{neighbor.name}}</h1>
                     <hr>
                 </div>
-                <div class="pane-body">
-                    <p>{{neighbor.location}}</p>
-            <p>Number of People {{neighbor.occupants_count}}</p>
+                <div class="pane-body" style="margin-left: 20px;">
+                    <p style="font-size: 25px;">Occupants: {{neighbor.occupants_count}}</p>
+                    <p style="font-size: 25px;text-transform: capitalize;"> Location: {{neighbor.location}}</p>
+            
                 </div>
                 <div class="panel-footer">
                     <button class="btn btn-md btn-warning"><a href="{% url 'neighbor-detail' neighbor.id %}">View Jirani Deatils</a></button>
-                    <button class="btn btn-md btn-warning"><a href="{% url 'update_count' neighbor.id %}">Update Occupants</a></button>
-                    <button class="btn btn-md btn-warning"><a href="{% url 'delete_neighborhood' neighbor.id %}">Delete</a></button>
+                    <!-- <button class="btn btn-md btn-warning"><a href="{% url 'update_count' neighbor.id %}">Update Occupants</a></button>
+                    <button class="btn btn-md btn-warning"><a href="{% url 'delete_neighborhood' neighbor.id %}">Delete</a></button> -->
                 </div>
             </div>
            
             {% endfor %}
         </div>
-        <div class="col-md-6">
-            <button class="btn btn-md btn-warning"><a href="{% url 'create_post' %}">Add Post</a></button>
+        <div class="col-md-6" style="width: 400px;">
+            <h1 class="text-center">Posts</h1>
+            <button class="btn btn-md btn-warning" style="float:right"><a href="{% url 'create_post' %}">Add Post</a></button> <br><br>
             {% for post in posts %}
             <div>
-                <div class="panel mb-4"  style="color:black;">
+                <div class="panel mb-4"  style="color:black; padding: auto;margin-left: 50px;">
                     <div class="panel-header">
-                        <h1 class="text-center">{{post.post_title}}</h1>
+                        <h1 class="text-center text-capitalize">{{post.post_title}}</h1>
                     </div>
                     <div class="panel-body">
-                        <p>{{post.post_description }}</p>
+                        <p style="font-size: 20px;">{{post.post_description }}</p>
+                        <p style="font-size: 15px; font-style: italic; font-weight: bolder;">Date {{post.posted}}</p>
                     </div>
                 </div>
             </div>
