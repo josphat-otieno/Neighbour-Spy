@@ -94,17 +94,17 @@ def profile_view(request):
 
 def edit_profile(request):
     user = request.user
-    user = User.objects.get(username = user.username)
+    # user = User.objects.get(username = user.username)
     if request.method == 'POST':
         user_form=EditProfileForm(request.POST, request.FILES,instance =request.user)
         profile_form = ProfileUpdateForm(request.POST, instance=request.user)
         if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
+            # user_form.save()
+            # profile_form.save()
             return redirect('profile')
     else:
         user_form=EditProfileForm(instance =request.user)
-        profile_form = ProfileUpdateForm(instance=request.user )
+        profile_form = ProfileUpdateForm(instance=request.user)
 
         context = {"user_form":user_form, "profile_form":profile_form, "user":user}
         return render(request, 'spy/edit_profile.html', context)

@@ -10,21 +10,21 @@ class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_name = models.CharField(max_length=60)
     phone_number = models.IntegerField(default=717878813)
-    bio = models.TextField(default='')
+    bio = models.TextField()
     email = models.EmailField(max_length=60)
 
     def __str__(self):
         return self.user
 
-# @receiver(post_save, sender=User)
-# def create_profile(sender, instance, created, **kwargs):
-#     if not created:
-#         Profile.objects.create(user=instance)
+    @receiver(post_save, sender=User)
+    def create_profile(sender, instance, created, **kwargs):
+        if not created:
+            Profile.objects.create(user=instance)
         
 
-# @receiver(post_save, sender=User)
-# def save_profile(sender, instance, created, **kwargs):
-#     instance.profile.save()
+    @receiver(post_save, sender=User)
+    def save_profile(sender, instance, created, **kwargs):
+        instance.profile.save()
 
 
 class Neighbor(models.Model):
