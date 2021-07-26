@@ -10,18 +10,17 @@ from .forms import *
 def index(request):
     businesses = Business.objects.all()
     neighbors = Neighbor.objects.all()
+    posts = Post.objects.all()
 
 
-    return render(request, 'spy/index.html',{"businesses":businesses, "neighbors":neighbors})
+    return render(request, 'spy/index.html',{"businesses":businesses, "neighbors":neighbors,"posts":posts})
 
 @login_required(login_url='/accounts/login/')
 def neighborhood_view(request, neighborhood_id):
     
     neighbor = Neighbor.objects.get(id = neighborhood_id)
     businesses = Business.objects.filter(neighborhood=neighbor)
-    posts = Post.objects.filter(neighborhood=neighbor)
-    
-    return render (request, 'spy/detail.html', {"neighbor":neighbor, "businesses":businesses,"posts":posts})
+    return render (request, 'spy/detail.html', {"neighbor":neighbor, "businesses":businesses,})
     
 def new_neighbor(request):
     current_user = request.user
@@ -59,11 +58,26 @@ def create_business(request, neighborhood_id):
             business.neighborhood= neighbor
             business.user = current_user
             business.save()
-            return redirect('neighbor-detail',neighbor.id )
+            return redirect('index')
 
     else:
         business_form=BusinessForm()
     return render(request, 'spy/business.html',{"business_form":business_form, })
+    
+def create_post(request):
+    # neighbor = Neighbor.objects.get(id = neighborhood_id)
+    current_user = request.user
+    if request.method =='POST':
+        post_form = PostForm(request.POST)
+        if post_form.is_valid():
+            post = post_form.save(commit=False)
+            # post.neighborhood= neighbor
+            post.user = current_user
+            post.save()
+            return redirect('index' )
+    else:
+        post_form=PostForm()
+    return render(request, 'spy/post.html',{"post_form":post_form})
 
 def delete_neighborhood(request, neighborhood_id):
     item = Neighbor.objects.get(id = neighborhood_id)
@@ -83,15 +97,14 @@ def edit_profile(request):
     user = User.objects.get(username = user.username)
     if request.method == 'POST':
         user_form=EditProfileForm(request.POST, request.FILES,instance =request.user)
-        profile_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
+        profile_form = ProfileUpdateForm(request.POST, instance=request.user)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            # messages.success(request, f'Your profile was updated successfuly')
             return redirect('profile')
     else:
         user_form=EditProfileForm(instance =request.user)
-        profile_form = ProfileUpdateForm(instance=request.user.profile )
+        profile_form = ProfileUpdateForm(instance=request.user )
 
         context = {"user_form":user_form, "profile_form":profile_form, "user":user}
         return render(request, 'spy/edit_profile.html', context)

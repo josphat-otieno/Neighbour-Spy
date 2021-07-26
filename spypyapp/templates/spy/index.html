@@ -5,7 +5,12 @@
 {% block content %}
 <div class="container" style="padding-top: 90px;">
     <h1>Neighbours watch</h1>
+    <button class="btn btn-md btn-warning"><a href="{% url 'create_post' %}">Add Post</a></button>
+    {% for post in posts %}
+    <h1>{{post.post_title}}</h1>
+    {% endfor %}
 
+   
     {% for neighbor in neighbors %}
     <h1>{{neighbor.name}}</h1>
     <p>{{neighbor.location}}</p>
@@ -14,6 +19,7 @@
     <button class="btn btn-md btn-warning"><a href="{% url 'neighbor-detail' neighbor.id %}">View Jirani Deatils</a></button>
     <button class="btn btn-md btn-warning"><a href="{% url 'update_count' neighbor.id %}">Update Occupants</a></button>
     <button class="btn btn-md btn-warning"><a href="{% url 'delete_neighborhood' neighbor.id %}">Delete</a></button>
+   
 
     {% endfor %}
 </div>

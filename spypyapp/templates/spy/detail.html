@@ -18,6 +18,12 @@
                 {% endfor %}
                 <hr>
                 <button class="btn btn-md btn-warning"><a href="{% url 'create_business' neighbor.id %}">Add business</a></button>
+
+                <button class="btn btn-md btn-warning"><a href="{% url 'create_post' %}">Add Post</a></button>
+                {% for post in posts %}
+                <h1>{{post.post_title}}</h1>
+                {% endfor %}
+            
             </div>
         </div>
     </div>

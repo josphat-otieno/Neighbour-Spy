@@ -88,4 +88,4 @@ class Post(models.Model):
     post_title = models.CharField(max_length=60)
     post_description = models.TextField(default='')
     posted = models.DateTimeField(auto_now_add=True)
-    neighborhood = models.ForeignKey(Neighbor, on_delete=models.CASCADE, related_name='neighbor')
+    

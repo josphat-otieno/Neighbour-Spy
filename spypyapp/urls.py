@@ -19,6 +19,8 @@ urlpatterns = [
     path('delete/<int:neighborhood_id>/', views.delete_neighborhood, name='delete_neighborhood'),
     url(r'^(?P<neighborhood_id>[0-9]+)/count$', views.update_count, name="update_count"),
     url(r'^(?P<neighborhood_id>[0-9]+)/business$', views.create_business, name="create_business"),
+    # url(r'^(?P<neighborhood_id>[0-9]+)/post$', views.create_post, name="create_post"),
+    path('post/', views.create_post, name="create_post"),
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
