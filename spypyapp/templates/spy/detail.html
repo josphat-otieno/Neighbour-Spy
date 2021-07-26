@@ -13,6 +13,9 @@
                 <h1 style="text-transform: capitalize; color: antiquewhite;">{{neighbor.name}}</h1>
             </div>
             <div class="col-md-4" style="padding-top: 90px; color: antiquewhite;" >
+                {% for business in businesses %}
+                {{business.business_name}}
+                {% endfor %}
                 <hr>
             </div>
         </div>

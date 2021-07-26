@@ -16,14 +16,23 @@ def index(request):
 
 @login_required(login_url='/accounts/login/')
 def neighborhood_view(request, neighborhood_id):
-    try:
-        neighbor = Neighbor.objects.get(id = neighborhood_id)
+    
+    neighbor = Neighbor.objects.get(id = neighborhood_id)
+    businesses = Business.objects.filter(neighborhood=neighbor)
+    posts = Post.objects.filter(neighborhood=neighbor)
+    if request.method =='POST':
+        businesse_form = BusinessForm(request.POST)
+        if businesse_form.is_valid():
+            business = businesse_form.save(commit=False)
+            business.neighborhood= neighbor
+            business.user = request.user.profile
+            business.save()
+            return redirect('neighborhood_view',neighbor.id )
 
-    except Neighbor.DoesNotExist:
-        
-        raise Http404
+    else:
+        businesse_form=BusinessForm()
 
-    return render (request, 'spy/detail.html', {"neighbor":neighbor})
+    return render (request, 'spy/detail.html', {"neighbor":neighbor, "businesses":businesses, "businesse_form":businesse_form, "posts":posts})
     
 def new_neighbor(request):
     current_user = request.user
