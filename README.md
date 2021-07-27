@@ -21,7 +21,7 @@ These are the behaviours/features that the application implements for use by a u
 
 ## Behaviour Driven Development
 ## Specifications
-| Behaviour | Input | Output |
+| Input |  | Output |
 | :---------------- | :---------------: | ------------------: |
 | users loads the application | *On page load* | login page is loaded |
 | user chooses to sign up if does not have an already created sccount | *On  click* | on successful sign up, the user is taken to login page|
