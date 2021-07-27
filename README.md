@@ -45,11 +45,11 @@ These are the behaviours/features that the application implements for use by a u
 * Create a vitual environment using the following command `python3 -m venv  virtual`
 * Activate the virtual environment using the following command `source virtual/bin/activate`
 * set up your Database in psql
-* run `python3.8 manage.py migrate` followed by `python3.8 manage.py makemigrations gallery` and finally `python3.8 manage.py migrate` 
+* run `python3.8 manage.py migrate` followed by `python3.8 manage.py makemigrations ` and finally `python3.8 manage.py migrate` 
 
-* create a super `python3.8 manage.py createsuperuser` to start adding your own photos
+* create a super `python3.8 manage.py createsuperuser` to start interacting with the admin dashboard
 *  Run the following command  to interact with the application `$python3.8 manage.py runserver`
-* Log in using the credentials for super user or create a new account`http://127.0.0.1:8000/admin/`
+* Log in using the credentials for super user at`http://127.0.0.1:8000/admin/`
 * Run tests units using the following command `$python3.8 manage.py test`
 
 ## Dependencies
