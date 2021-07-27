@@ -62,7 +62,7 @@ def create_business(request, neighborhood_id):
             business.neighborhood= neighbor
             business.user = current_user
             business.save()
-            return redirect('index')
+            return redirect('neighbor-detail', neighbor.id)
 
     else:
         business_form=BusinessForm()

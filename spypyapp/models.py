@@ -30,7 +30,7 @@ class Profile (models.Model):
 class Neighbor(models.Model):
     name =models.CharField(max_length=60)
     location = models.CharField(max_length=60)
-    health_contact = models.IntegerField( blank=True, default=+254717878813)
+    health_contact = models.IntegerField( blank=True, default=717878813)
     police_contact = models.IntegerField( blank=True, default=999)
     occupants_count = models.IntegerField(default=1)
     profile = models.ForeignKey(User, on_delete=models.CASCADE, related_name='neighbor')
