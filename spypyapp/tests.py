@@ -22,7 +22,7 @@ class NeighbourTestCase(TestCase):
         self.profile = Profile(user_name='jose', phone_number=717187881, bio= 'okay', email= 'jose@gmail.com', user = self.user)
         self.profile.save()
 
-        self.new_neighbour = Neighbor(id=1, name='jose', location='nairobi',health_contact=717187881,police_contact=717187881,occupants_count=1, profile = self.profile.user  )
+        self.new_neighbour = Neighbor(id=1, name='jose', location='nairobi',health_contact=717187881,police_contact=717187881,occupants_count=1, profile = self.profile.user)
         self.new_neighbour.save()
 
     def test_instance(self):
@@ -91,6 +91,18 @@ class PostTestCase(TestCase):
 
     def test_instance(self):
         self.assertTrue(isinstance(self.new_post, Post))
+
+    def test_save_method(self):
+        self.new_post.save_post()
+        post = Post.objects.all()
+        self.assertTrue(len(post)>0)
+
+    def test_delete_method(self):
+        self.new_post.save_post()
+        post = Post.objects.all()
+        self.new_post.delete_post()
+        self.assertTrue(len(post)==0)
+
 
 
 

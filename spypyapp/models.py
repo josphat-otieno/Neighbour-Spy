@@ -88,4 +88,14 @@ class Post(models.Model):
     post_title = models.CharField(max_length=60)
     post_description = models.TextField(default='')
     posted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.post_title
+
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()
+        
     
