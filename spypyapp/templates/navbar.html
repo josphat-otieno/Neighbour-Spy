@@ -6,7 +6,8 @@
       </button>
     </div>
     <div class="navbar-collapse collapse">
-      <a href="/" style="font-size: 25px; color: antiquewhite; margin-bottom: 0px;">JIRANI</a>
+      <a href="/" style="font-size: 25px; color: antiquewhite; margin-bottom: 0px; font-weight: bolder;">JIRANI</a>
+      <a  style="margin-left: 10px;font-size: 25px; color: antiquewhite; font-weight: bolder;"href="/admin">ADMIN DASHBOARD </a>
     </div>
     <div class="col-sm- col-md-8 navbar-center" style="text-align:center; margin-left: 110px;">
       <form class="form-inline" action="{%url 'search' %}">
@@ -17,12 +18,11 @@
       </form>
     </div>
     <div class="nav navbar-nav navbar-right">
-      <a  style="margin-right: 10px; font-size: 20px; color: antiquewhite;" href="{% url 'neighbor' %}">Add Neighbor</a>
-
-      <a  style="margin-right: 10px;font-size: 20px; color: antiquewhite;"href="{% url 'profile' %}">Profile </a>
+     
       {% if user.is_authenticated %}
-      <div class="nav navbar-nav navbar-right"><a style="margin-right: 10px;font-size: 20px; color: antiquewhite;" href="accounts/logout">Logout</a></div>
-      <a  style="margin-right: 10px;font-size: 20px; color: antiquewhite;"href="/admin">Admin </a>
+      <a  style="margin-right: 10px; font-size: 20px; color: antiquewhite; font-weight: bolder;" href="{% url 'neighbor' %}">Add Neighbor</a>
+      <a  style="margin-right: 10px;font-size: 20px; color: antiquewhite;font-weight: bolder;"href="{% url 'profile' %}">Profile </a>
+      <div class="nav navbar-nav navbar-right"><a style="margin-right: 10px;font-size: 20px; color: antiquewhite;font-weight: bolder;" href="accounts/logout">Logout</a></div>   
       {% else %}
       <ul>
         <li><a style="color: green; font-size: larger; font-weight: bold;">
@@ -30,10 +30,7 @@
           <a class='btn btn-default' href="/accounts/register">Sign Up</a>
           {%endif%}
           </li>
-
-          <!--  -->
       </ul>
-
     </div>
   </div>
 </div>

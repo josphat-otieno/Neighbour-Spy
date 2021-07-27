@@ -6,7 +6,7 @@ from .forms import *
 
  
 # Create your views here.
-@login_required(login_url='/accounts/login/')
+# @login_required(login_url='/accounts/login/')
 def index(request):
     businesses = Business.objects.all()
     neighbors = Neighbor.objects.all()
@@ -22,6 +22,7 @@ def neighborhood_view(request, neighborhood_id):
     businesses = Business.objects.filter(neighborhood=neighbor)
     return render (request, 'spy/detail.html', {"neighbor":neighbor, "businesses":businesses,})
     
+@login_required(login_url='/accounts/login/')    
 def new_neighbor(request):
     current_user = request.user
     if request.method == 'POST':
@@ -36,6 +37,8 @@ def new_neighbor(request):
         new_form=NeighborForm()
     return render(request, 'spy/new_neighbor.html', {"new_form":new_form})
         
+
+@login_required(login_url='/accounts/login/')        
 def update_count(request, neighborhood_id):
     count = Neighbor.objects.get(id=neighborhood_id)
     count_form = CountForm(instance=count)
@@ -48,6 +51,7 @@ def update_count(request, neighborhood_id):
 
     return render (request, 'spy/update_count.html', context)
 
+@login_required(login_url='/accounts/login/')
 def create_business(request, neighborhood_id):
     neighbor = Neighbor.objects.get(id = neighborhood_id)
     current_user = request.user
@@ -63,7 +67,8 @@ def create_business(request, neighborhood_id):
     else:
         business_form=BusinessForm()
     return render(request, 'spy/business.html',{"business_form":business_form, })
-    
+
+@login_required(login_url='/accounts/login/')    
 def create_post(request):
     # neighbor = Neighbor.objects.get(id = neighborhood_id)
     current_user = request.user
@@ -79,6 +84,7 @@ def create_post(request):
         post_form=PostForm()
     return render(request, 'spy/post.html',{"post_form":post_form})
 
+@login_required(login_url='/accounts/login/')
 def delete_neighborhood(request, neighborhood_id):
     item = Neighbor.objects.get(id = neighborhood_id)
     if request.method == 'POST':
@@ -92,6 +98,7 @@ def profile_view(request):
     user = User.objects.get(username = user.username)
     return render (request, 'spy/profile.html', {"user":user})
 
+@login_required(login_url='/accounts/login/')
 def edit_profile(request):
     user = request.user
     # user = User.objects.get(username = user.username)
