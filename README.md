@@ -26,9 +26,12 @@ These are the behaviours/features that the application implements for use by a u
 | users loads the application | *On page load* | login page is loaded |
 | user chooses to sign up if does not have an already created sccount | *On  click* | on successful sign up, the user is taken to login page|
 | user logs in using the correct credentials | *on page load* | home page is loaded and the user sees various photos on the page |
-| user clicks on profile| *On page load* | profile info is loaded showing user info such as username, profile photo, email and phone numbber and the projects the user has posted|
-|user clicks o add neighbour| *on page load*| |
-| user clicks on logout  | *on page load* | user is logged out of the application and taken login page |
+| user clicks on `profile`| *On page load* | profile info is loaded showing user info such as username, email and phone numbber  |
+|user clicks on `add neighbour`| *on page load*| form for adding neighbor is loaded and on submit, a new neighborhood is added|
+|use clicks on `add post`| *on page load*| form for adding a post is loaded|
+|user clicks on `view jirani details` | *on page load* | details about the neighborhood are loade including businesses around that neighborhood|
+|user clicks on `leave neighborhood` |*on page load* | user is presented with a choice to leave the neighbourhood|
+| user clicks on `logout`  | *on page load* | user is logged out of the application and taken login page |
 
 
 
@@ -71,4 +74,4 @@ The project is under the [MIT](licence) license.
 
 ### live site
 
-View [live](https://jose-awards.herokuapp.com/)
+View [live](https://jose-jirani.herokuapp.com/)
