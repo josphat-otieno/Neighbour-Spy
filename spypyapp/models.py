@@ -14,7 +14,7 @@ class Profile (models.Model):
     email = models.EmailField(max_length=60)
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 # @receiver(post_save, sender=User)
 # def create_profile(sender, instance, created, **kwargs):
@@ -53,7 +53,7 @@ class Neighbor(models.Model):
 
     @classmethod
     def update_neighborhood(cls, neighborhood_id):
-        neighborhood  = cls.objects.filter(id=neighborhood_id).update()
+        neighborhood  = cls.objects.filter(id=neighborhood_id).update(id)
         return neighborhood
 
     @classmethod
